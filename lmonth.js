@@ -43,8 +43,11 @@ return sss;
 function lunarmonth(Y,M,L) {
 var att={};
 attrib_year(Y,att);
-ss="<h3>"+att.cycle+"-р жарны "+att.elcor+" "+att.animalin+" жилийн "
-+mmn[M-1]+" "+(L?" илүү ":" ")+"сар<br/></h3>"
+ss="<h2>"+att.cycle+"-р жарны "+att.elcor+" "+att.animalin+" жилийн "
++mmn[M-1]+" "+(L?" илүү ":" ")+"сар<br/></h2>"
+
+ss+="<h3>Билгийн хоногуудын эхлэх агшин</h3>";
+
 var j1=first_day_jd(Y,M,L);
 var jj=julian_day(Y,M,L,30);
 
@@ -53,9 +56,10 @@ var ddd = today.getDate();
 var mmm = today.getMonth()+1;
 var yyy = today.getFullYear();
 var jjj = g2jdn(yyy,mmm,ddd);
-ss+="<TABLE><TR><TD><b>сарны өнцөг</b></TD>";
+ss+="<TABLE><TR><TD><b>билгийн хоног</b></TD>";
+ss+="<TD ALIGN=CENTER><b>&nbsp;сарны өнцөг&nbsp;</b></TD>";
 ss+="<TD ALIGN=CENTER><b>&nbsp;дүүрэлт&nbsp;</b></TD>";
-ss+="<TD ALIGN=CENTER><b>аргын өдөр</b></TD>";
+ss+="<TD ALIGN=CENTER><b>аргын хоног</b></TD>";
 ss+="<TD><b>цаг минут</b></TD>";
 ss+="<TD ALIGN=CENTER><b>&nbsp;цэх мандал</b></TD></TR>";
 
@@ -65,17 +69,18 @@ var dd=0;
 while (dd<=30) {
 var p = dd/30;
 var j = find_event(j1+dd-3,j1+dd+2,p);
-if (dd<5) j = find_newmoon(j1+dd-3,j1+dd+2,p);
-if (dd>25) j = find_newmoon(j1+dd-3,j1+dd+2,p-1);
+if (dd<6) j = find_newmoon(j1+dd-3,j1+dd+2,p);
+if (dd>24) j = find_newmoon(j1+dd-3,j1+dd+2,p-1);
 var sd = JSDate(j);
 ra = moon_ra(j-2451545);
 var sa="";
 var sb="";
 if (Math.floor(j)==jjj) {sa = "<b><FONT COLOR='blue'>"; sb = "</FONT></b>"; }
 ss+="<TR BGCOLOR="+bgcol[bb]+">";bb=1-bb;
+ss+="<TD ALIGN=CENTER>"+(dd%30+1)+"</TD>";
 ss+="<TD ALIGN=CENTER>"+dd*12+"&deg;"+"</TD>";
 ss+="<TD ALIGN=CENTER>"+Math.round((1-Math.cos(p*Math.PI*2))*5000)/100+"%</TD>";
-ss+="<TD ALIGN=CENTER>"+sa+sd.getFullYear()+"."+(sd.getMonth()+1)+"."+sd.getDate()+sb+"</TD>";
+ss+="<TD ALIGN=CENTER>"+sa+sd.getFullYear()+"."+(sd.getMonth()+1)+"."+((sd.getDate()<=9)?"0":"")+sd.getDate()+sb+"</TD>";
 ss+="<TD ALIGN=CENTER>"+((sd.getHours()<=9)?"0":"")+sd.getHours()+":"+((sd.getMinutes()<=9)?"0":"")+sd.getMinutes()+"</TD>";
 ss+="<TD ALIGN=CENTER>"+Math.round(ra*360)+"&deg;</TD>";
 ss+="</TR>";
