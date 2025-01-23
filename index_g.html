@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+    <head><meta charset=utf-8>
+        <title>Цогт цагийн хүрдэн</title>
+    </head>
+<body>
+    <h2>Цогт цагийн хүрдэн хэмээх судраас эх авсан календариуд</h2>
+          <p>Хувилбар:
+    <select id="txtType" name="Type" onchange="change_type()">
+     <option value=0>Пүг (Баруун Төвд)</option>
+     <option value=1>Цүр (Гол Төвд)</option>
+     <option value=2>Төгсбуянт (Монгол)</option>
+     <option value=3>Бутан</option>
+     <option value=4>Цагийн хүрдэн</option>
+    </select> </p>
+     <p>Билгийн жилийн дугаар:
+    <button onclick="prev_year()"><</button>
+    <input type="number" id="txtYear" name="Year" style="width: 50px;" onchange="change()">
+    <button onclick="next_year()">></button>
+     &nbsp;&nbsp;&nbsp;Билгийн сар:
+    <button onclick="prev()"><</button>
+    <select id="txtMonth" name="Month" onchange="change()">
+     <option value=1>хаврын эхэн</option>
+     <option value=2>хаврын дунд</option>
+     <option value=3>хаврын сүүл</option>
+     <option value=4>зуны эхэн</option>
+     <option value=5>зуны дунд</option>
+     <option value=6>зуны сүүл</option>
+     <option value=7>намрын эхэн</option>
+     <option value=8>намрын дунд</option>
+     <option value=9>намрын сүүл</option>
+     <option value=10>өвлийн эхэн</option>
+     <option value=11>өвлийн дунд</option>
+     <option value=12>өвлийн сүүл</option>
+    </select>
+    <select id="txtLeap" name="Leap" onchange="go()">
+     <option value="regular">ердийн</option>
+     <option value="leap">илүү</option>
+    </select>
+    <button onclick="next()">></button></p>
+    <p id="cal"></p>
+     <p><font size=1> [ <a href="index.html">Буцах</a> ] 
+        [ <a href="https://www.facebook.com/mongolcal/">ФБ хуудас</a>] 
+	[ <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//cal.edu.mn/cal/index_g.html">Share on Facebook</a> ]
+	[ <a href="https://twitter.com/home?status=http%3A//cal.edu.mn/cal/index_g.html">Share on Twitter</a> ]
+	</font></p>
+    <script type="text/javascript" src="calendar.js"></script>
+    <script type="text/javascript" src="zurhai.js"></script>
+    <script type="text/javascript">
+      var td=new Date();
+      var dat={}; 
+      lunar_month(td.getYear()+1900,td.getMonth()+1,td.getDate(),dat);
+      document.getElementById("txtYear").value=dat.Y;
+      document.getElementById("txtMonth").value=dat.M;
+      if(!leap_month(dat.Y,dat.M)) document.getElementById("txtLeap").options[1].disabled=true;
+      document.getElementById("txtLeap").value=dat.L?'leap':'regular';
+      document.getElementById("cal").innerHTML = calendar3(dat.Y,dat.M,dat.L);
+      function go() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        var m = parseInt(document.getElementById("txtMonth").value);
+        var l = (document.getElementById("txtLeap").value=='leap');
+       document.getElementById("cal").innerHTML = calendar3(y,m,l);
+      }
+      function prev() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        var m = parseInt(document.getElementById("txtMonth").value);
+        var l = (document.getElementById("txtLeap").value=='leap');
+	var dat={};
+        prev_month(y,m,l,dat);
+        document.getElementById("txtYear").value=dat.Y;
+        document.getElementById("txtMonth").value=dat.M;
+        document.getElementById("txtLeap").value=dat.L?'leap':'regular';
+       	document.getElementById("txtLeap").options[1].disabled=!leap_month(dat.Y,dat.M);
+        document.getElementById("cal").innerHTML = calendar3(dat.Y,dat.M,dat.L); 
+      }
+      function next() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        var m = parseInt(document.getElementById("txtMonth").value);
+        var l = (document.getElementById("txtLeap").value=='leap');
+	var dat={};
+        next_month(y,m,l,dat);
+        document.getElementById("txtYear").value=dat.Y;
+        document.getElementById("txtMonth").value=dat.M;
+        document.getElementById("txtLeap").value=dat.L?'leap':'regular';
+       	document.getElementById("txtLeap").options[1].disabled=!leap_month(dat.Y,dat.M);
+        document.getElementById("cal").innerHTML = calendar3(dat.Y,dat.M,dat.L); 
+      }
+      function prev_year() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        document.getElementById("txtYear").value=y-1;
+        change();
+      }
+      function next_year() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        document.getElementById("txtYear").value=y+1;
+        change();
+      }
+      function change() {
+        var y = parseInt(document.getElementById("txtYear").value);
+        var m = parseInt(document.getElementById("txtMonth").value);
+      if(y<Ymin) {y=Ymin; document.getElementById("txtYear").value=y;}
+      if (leap_month(y,m))
+       	document.getElementById("txtLeap").options[1].disabled=false;
+      else {
+       	document.getElementById("txtLeap").options[1].disabled=true;
+	document.getElementById("txtLeap").value='regular';	
+      }
+      go();
+      }
+      function change_type() {
+        var t = parseInt(document.getElementById("txtType").value);
+	switch(t) {
+	case 0: set_cal_data(806); break;
+	case 1: set_cal_data(1732); break;
+	case 2: set_cal_data(1747); break;
+	case 3: set_cal_data(1754); break;
+	case 4: set_cal_data(100806); break;
+	default: set_cal_data(1747); break;
+	}
+	change();
+      }
+  </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-74856003-1', 'auto');
+  ga('send', 'pageview');
+</script>
+  </body>
+</html>

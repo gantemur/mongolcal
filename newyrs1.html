@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head><meta charset=utf-8>
+        <title>Монгол билгийн тооллын календарь</title>
+    </head>
+<body>
+    <!--h2>Монгол билгийн тооллын календарь</h2-->
+
+<p>
+<a href="index.html">Сар сараар</a> |
+<a href="year.html">бүтэн жилээр</a> |
+<a href="month3.html">3 сараар</a> |
+<font color="blue" style="BACKGROUND-COLOR: yellow">цагаан сар</font> |
+<a href="sunseas.html">нарны улирал</a> 
+</p>
+     <p>
+    <input type="number" id="txtYear1" name="Year" style="width: 50px;" onchange="change()">
+	оноос
+    <input type="number" id="txtYear2" name="Year" style="width: 50px;" onchange="change()">
+	оны хоорондох цагаан сарын хүснэгт
+    <p id="cal"></p>
+     <p><font size=1>
+    [ <a href="https://www.facebook.com/mongolcal/">ФБ хуудас</a>] 
+    [ <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//cal.edu.mn">Share on Facebook</a> ]
+    [ <a href="https://twitter.com/home?status=http%3A//cal.edu.mn">Share on Twitter</a> ]
+    [ <a href="index_g.html">Төвд, Бутаны календарь</a> ] 
+	</font></p>
+    <script type="text/javascript" src="moonphase.js"></script>
+    <script type="text/javascript" src="newyrs1.js"></script>
+    <script type="text/javascript" src="zurhai.js"></script>
+    <script type="text/javascript">
+      document.getElementById("txtYear1").value=2000;
+      document.getElementById("txtYear2").value=2025;
+      document.getElementById("cal").innerHTML = newyrs(2000,2025);
+      function go() {
+        var y1 = parseInt(document.getElementById("txtYear1").value);
+        var y2 = parseInt(document.getElementById("txtYear2").value);
+        document.getElementById("cal").innerHTML = newyrs(y1,y2);
+      }
+      function change() {
+        var y1 = parseInt(document.getElementById("txtYear1").value);
+        var y2 = parseInt(document.getElementById("txtYear2").value);
+	if(y1<Ymin) {y1=Ymin; document.getElementById("txtYear1").value=y1;}
+	if(y2<Ymin) {y2=Ymin; document.getElementById("txtYear1").value=y2;}
+	go();
+      }
+  </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-74856003-1', 'auto');
+  ga('send', 'pageview');
+</script>
+  </body>
+</html>
