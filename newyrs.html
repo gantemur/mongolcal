@@ -11,7 +11,8 @@
 <a href="year.html">бүтэн жилээр</a> |
 <a href="month3.html">3 сараар</a> |
 <font color="blue" style="BACKGROUND-COLOR: yellow">цагаан сар</font> |
-<a href="sunseas.html">нарны улирал</a> 
+<a href="sunseas.html">нарны улирал</a> |
+<a href="lunarmonth.html">билгийн сар</a> 
 </p>
      <p>
     <input type="number" id="txtYear1" name="Year" style="width: 50px;" onchange="change()">
@@ -29,9 +30,9 @@
     <script type="text/javascript" src="newyrs.js"></script>
     <script type="text/javascript" src="zurhai.js"></script>
     <script type="text/javascript">
-      document.getElementById("txtYear1").value=2000;
-      document.getElementById("txtYear2").value=2025;
-      document.getElementById("cal").innerHTML = newyrs(2000,2025);
+      document.getElementById("txtYear1").value=2020;
+      document.getElementById("txtYear2").value=2050;
+      document.getElementById("cal").innerHTML = newyrs(2020,2050);
       function go() {
         var y1 = parseInt(document.getElementById("txtYear1").value);
         var y2 = parseInt(document.getElementById("txtYear2").value);

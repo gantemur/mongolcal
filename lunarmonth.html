@@ -7,12 +7,12 @@
     <!--h2>Монгол билгийн тооллын календарь</h2-->
 
 <p>
-<font color="blue" style="BACKGROUND-COLOR: yellow">Сар сараар</font> | 
+<a href="index.html">Сар сараар</a> |
 <a href="year.html">бүтэн жилээр</a> |
 <a href="month3.html">3 сараар</a> |
 <a href="newyrs.html">цагаан сар</a> |
 <a href="sunseas.html">нарны улирал</a> |
-<a href="lunarmonth.html">билгийн сар</a>
+<font color="blue" style="BACKGROUND-COLOR: yellow">билгийн сар</font>
 </p>
      <p>Билгийн жилийн дугаар:
     <button onclick="prev_year()"><</button>
@@ -48,7 +48,7 @@
     [ <a href="index_g.html">Төвд, Бутаны календарь</a> ] 
 	</font></p>
     <script type="text/javascript" src="moonphase.js"></script>
-    <script type="text/javascript" src="month.js"></script>
+    <script type="text/javascript" src="lmonth.js"></script>
     <script type="text/javascript" src="zurhai.js"></script>
     <script type="text/javascript">
       var td=new Date();
@@ -59,13 +59,13 @@
       if(!leap_month(dat.Y,dat.M)) document.getElementById("txtLeap").options[1].disabled=true;
       document.getElementById("txtLeap").value=dat.L?'leap':'regular';
       document.getElementById("year").innerHTML = year_string(dat.Y);
-      document.getElementById("cal").innerHTML = month(dat.Y,dat.M,dat.L);
+      document.getElementById("cal").innerHTML = lunarmonth(dat.Y,dat.M,dat.L);
       function go() {
         var y = parseInt(document.getElementById("txtYear").value);
         var m = parseInt(document.getElementById("txtMonth").value);
         var l = (document.getElementById("txtLeap").value=='leap');
 	document.getElementById("year").innerHTML = year_string(y);
-        document.getElementById("cal").innerHTML = month(y,m,l);
+        document.getElementById("cal").innerHTML = lunarmonth(y,m,l);
       }
       function prev() {
         var y = parseInt(document.getElementById("txtYear").value);
@@ -78,7 +78,7 @@
         document.getElementById("txtLeap").value=dat.L?'leap':'regular';
        	document.getElementById("txtLeap").options[1].disabled=!leap_month(dat.Y,dat.M);
       document.getElementById("year").innerHTML = year_string(dat.Y);
-      document.getElementById("cal").innerHTML = month(dat.Y,dat.M,dat.L);
+      document.getElementById("cal").innerHTML = lunarmonth(dat.Y,dat.M,dat.L);
       }
       function next() {
         var y = parseInt(document.getElementById("txtYear").value);
@@ -91,7 +91,7 @@
         document.getElementById("txtLeap").value=dat.L?'leap':'regular';
        	document.getElementById("txtLeap").options[1].disabled=!leap_month(dat.Y,dat.M);
       document.getElementById("year").innerHTML = year_string(dat.Y);
-      document.getElementById("cal").innerHTML = month(dat.Y,dat.M,dat.L);
+      document.getElementById("cal").innerHTML = lunarmonth(dat.Y,dat.M,dat.L);
       }
       function prev_year() {
         var y = parseInt(document.getElementById("txtYear").value);
